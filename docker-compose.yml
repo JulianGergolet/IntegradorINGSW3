@@ -1,0 +1,25 @@
+version: '3'
+services: 
+  database: 
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=julian
+      - MYSQL_DATABASE=juliancito
+    ports: 
+      - 3306:3306
+    volumes:
+      - ./transacciones.sql:/docker-entrypoint-initdb.d/transacciones.sql
+      
+  backend: 
+    build: ./backend
+    depends_on:
+      - database
+    links: 
+      - database
+    ports:
+      - 3000:3000
+    
+  frontend:
+    build: ./frontend # Ruta a la carpeta frontend
+    ports:
+      - 8080:80

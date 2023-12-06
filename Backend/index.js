@@ -1,73 +1,65 @@
-const express = require('express');
-const cors = require('cors');
-const mysql = require('mysql');
+import express from 'express';
+import { createPool } from 'mysql2/promise';
+import cors from 'cors';
 
 const app = express();
-const port = 3000;
-
-app.use(
-    express.urlencoded({
-        extended: true
-    })
-);
-
-app.use(express.json({
-    type: "*/*"
-}));
-
 app.use(cors());
 
-// Configuración de la conexión a la base de datos
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root', // Reemplaza con tu nombre de usuario de MySQL
-    password: '', // Reemplaza con tu contraseña de MySQL
-    database: 'prueba_transacciones' // Reemplaza con el nombre de tu base de datos
+// Middleware para permitir el uso de JSON en las solicitudes
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Hello World');
 });
 
-db.connect((err) => {
-    if (err) {
-        console.log('Error al conectar a la base de datos:', err);
-    } else {
-        console.log('Conexión exitosa a la base de datos');
+const pool = createPool({
+    host: 'database',
+    user: 'root',
+    password: 'julian',
+    database: 'juliancito',
+    port: 3306
+});
+
+// Verifica la conexión a la base de datos al inicio del servidor
+(async () => {
+    try {
+        const connection = await pool.getConnection();
+        console.log('Conexión a la base de datos establecida correctamente');
+        connection.release();
+    } catch (error) {
+        console.error('Error al conectar a la base de datos:', error.message);
+    }
+})();
+
+// Ruta POST para insertar en la base de datos
+app.post('/transaction', async (req, res) => {
+    try {
+        const { Descripcion, Precio } = req.body;
+        const insertQuery = 'INSERT INTO transaccion (Descripcion, Precio) VALUES (?, ?)';
+        const result = await pool.query(insertQuery, [Descripcion, Precio]);
+        
+        console.log('Transacción insertada correctamente en la base de datos');
+        res.status(200).send('Transacción insertada correctamente');
+    } catch (error) {
+        console.error('Error al insertar en la base de datos:', error);
+        res.status(500).send('Error interno del servidor');
     }
 });
 
-// Ruta GET para verificar que el servidor está funcionando
-app.get('/transaction', (req, res) => {
-    res.send('¡El servidor está funcionando!');
-});
-
-// Ruta POST para insertar en la base de datos
-app.post('/transaction', (req, res) => {
-    const { Descripcion, Precio } = req.body;
-
-    const insertQuery = 'INSERT INTO transaccion (Descripcion, Precio) VALUES (?, ?)';
-    db.query(insertQuery, [Descripcion, Precio], (err, result) => {
-        if (err) {
-            console.log('Error al insertar en la base de datos:', err);
-            res.status(500).send('Error interno del servidor');
-        } else {
-            console.log('Transacción insertada correctamente en la base de datos');
-            res.status(200).send('Transacción insertada correctamente');
-        }
-    });
-});
-
 // Ruta GET para obtener las últimas 5 transacciones
-app.get('/lasttransactions', (req, res) => {
-    const selectQuery = 'SELECT * FROM transaccion ORDER BY id DESC LIMIT 5';
-    db.query(selectQuery, (err, result) => {
-        if (err) {
-            console.log('Error al obtener las últimas transacciones:', err);
-            res.status(500).send('Error interno del servidor');
-        } else {
-            console.log('Últimas transacciones obtenidas correctamente');
-            res.status(200).json(result);
-        }
-    });
+app.get('/lasttransactions', async (req, res) => {
+    try {
+        const selectQuery = 'SELECT * FROM transaccion ORDER BY id DESC LIMIT 5';
+        const [rows] = await pool.query(selectQuery);
+        
+        console.log('Últimas transacciones obtenidas correctamente');
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error('Error al obtener las últimas transacciones:', error);
+        res.status(500).send('Error interno del servidor');
+    }
 });
 
-app.listen(port, () => {
-    console.log(`Estoy escuchando en http://localhost:${port}`);
+app.listen(3000, () => {
+    console.log('Estoy escuchando en el puerto 3000');
 });
