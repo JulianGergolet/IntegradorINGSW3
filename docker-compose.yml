@@ -11,7 +11,7 @@ services:
       - ./transacciones.sql:/docker-entrypoint-initdb.d/transacciones.sql
       
   backend: 
-    build: ./backend
+    build: ./Backend
     depends_on:
       - database
     links: 
@@ -20,6 +20,6 @@ services:
       - 3000:3000
     
   frontend:
-    build: ./frontend # Ruta a la carpeta frontend
+    build: ./Frontend # Ruta a la carpeta frontend
     ports:
       - 8080:80
