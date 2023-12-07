@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 const pool = createPool({
-    host: process.env.DB_HOST || 'database', 
+    host: 'database', 
     user: 'root',
     password: 'julian',
     database: 'juliancito',
