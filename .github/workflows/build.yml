@@ -32,6 +32,6 @@ jobs:
       - name: Correr test unitarios
         working-directory: ./Backend
         run: |
-          docker-compose exec integradoringsw3_backend_1 npx jest Tests.js
+          docker exec integradoringsw3_backend_1 npx jest Tests.js
         
 
