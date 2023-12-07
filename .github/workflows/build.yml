@@ -24,6 +24,5 @@ jobs:
 
       - name: Build and run containers
         run: |
-          cd $GITHUB_WORKSPACE   # Cambia al directorio del repositorio
-          docker-compose up -d  # Ejecuta docker-compose desde la raíz del repositorio
+          docker-compose up -d
 
