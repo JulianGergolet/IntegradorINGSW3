@@ -23,7 +23,7 @@ jobs:
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest
 
       - name: Authenticate with Google Cloud
-        run: gcloud auth activate-service-account --key-file=${{ secrets.GCLOUD_SERVICE_KEY }}
+        run: echo '${{ secrets.GCLOUD_SERVICE_KEY }}' > /tmp/gcloud_key.json && gcloud auth activate-service-account --key-file=/tmp/gcloud_key.json
         
       - name: Enable Cloud Run API
         run: gcloud services enable run.googleapis.com --project=${{ secrets.GCLOUD_PROJECT_ID }}
