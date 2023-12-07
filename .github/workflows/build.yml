@@ -33,10 +33,6 @@ jobs:
       - name: esperar
         run: sleep 60
 
-      - name: Correr backend
-        run: nohup node index.js &    # Ejecuta la aplicación en segundo plano
-        working-directory: ./Backend
-
       - name: Correr Tests
         run: |
           chmod +x ./node_modules/.bin/mocha
