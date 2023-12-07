@@ -24,7 +24,7 @@ jobs:
 
       - name: Build and run containers
         run: |
-          docker compose up 
+          nohup docker compose up &
 
       - name: Instalar Node.js
         uses: actions/setup-node@v2
@@ -38,6 +38,9 @@ jobs:
       - name: instalar mocha
         run: npm install --save-dev mocha 
         working-directory: ./Backend
+
+      - name: esperar
+        run: sleep 60
 
       - name: Correr backend
         run: nohup node index.js &    # Ejecuta la aplicación en segundo plano
