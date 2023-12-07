@@ -28,6 +28,18 @@ jobs:
 
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+      
+      - name: Tag and push Docker images
+        run: |
+          docker tag integradoringsw3-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest
+          docker tag integradoringsw3-frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest
+          docker tag mysql:latest ${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest
+
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest
+          
+
 
 
 
