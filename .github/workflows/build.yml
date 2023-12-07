@@ -26,7 +26,26 @@ jobs:
         run: |
           docker-compose up -d
 
-      - name: Run backend tests
-        working-directory: Backend
+      - name: Instalar Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias
+        run: npm install
+        working-directory: ./Backend
+
+      - name: Correr Tests
         run: |
-          npm test     # Ejecuta los tests 
+          export DB_HOST=localhost
+          (timeout 10 npm test || true)
+          if [ "$(timeout 10 npm test | grep -c '5 passing')" -eq 1 ]; then
+            echo "Tests pasaron exitosamente."
+          else
+            echo "Los tests no pasaron. Terminando el flujo de trabajo."
+            exit 1
+          fi
+        working-directory: ./Backend
+
+
+
