@@ -25,7 +25,11 @@ jobs:
       - name: Build and run containers
         run: |
           docker-compose up -d
-      
+
+      - name: Install dependencies
+        working-directory: backend
+        run: npm install
+        
       - name: Run backend tests
         working-directory: Backend
         run: |
