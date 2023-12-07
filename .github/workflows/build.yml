@@ -39,6 +39,10 @@ jobs:
         run: npm install --save-dev mocha 
         working-directory: ./Backend
 
+      - name: Correr backend
+        run: nohup node index.js &    # Ejecuta la aplicación en segundo plano
+        working-directory: ./Backend
+
       - name: Correr Tests
         run: |
           export DB_HOST=localhost
