@@ -26,9 +26,10 @@ jobs:
         run: |
           docker-compose up -d
 
-      - name: Install dependencies
+       - name: Set execute permission for Tests.js
         working-directory: Backend
-        run: npm install
+        run: |
+          chmod +x Tests.js
 
       - name: Run backend tests
         working-directory: Backend
