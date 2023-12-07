@@ -27,6 +27,6 @@ jobs:
           docker-compose up -d
       
       - name: Run backend tests
+        working-directory: Backend
         run: |
-          cd backend  # Cambia al directorio 'backend'
           npm test     # Ejecuta los tests 
