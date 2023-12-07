@@ -27,9 +27,9 @@ jobs:
           docker-compose up -d
 
       - name: Install dependencies
-        working-directory: backend
+        working-directory: Backend
         run: npm install
-        
+
       - name: Run backend tests
         working-directory: Backend
         run: |
