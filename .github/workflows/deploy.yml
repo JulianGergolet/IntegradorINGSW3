@@ -24,10 +24,10 @@ jobs:
 
       - name: Authenticate with Google Cloud
         run: echo '${{ secrets.GCLOUD_SERVICE_KEY }}' > /tmp/gcloud_key.json && gcloud auth activate-service-account --key-file=/tmp/gcloud_key.json
-        
+
       - name: Enable Cloud Run API
         run: gcloud services enable run.googleapis.com --project=${{ secrets.GCLOUD_PROJECT_ID }}
-          
+
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
         with:
@@ -36,25 +36,24 @@ jobs:
           
       - name: Set default region
         run: gcloud config set run/region southamerica-east1
-        
-      - name: Deploy to Cloud Run Backend
+
+      - name: Deploy services to Cloud Run
         run: |
           gcloud run deploy integradoringsw3-backend \
             --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest \
             --platform=managed \
-            --allow-unauthenticated
+            --allow-unauthenticated \
             --quiet
 
-      - name: Deploy to Cloud Run Frontend
-        run: |
           gcloud run deploy integradoringsw3-frontend \
             --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest \
             --platform=managed \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --quiet
 
-      - name: Deploy to Cloud Run MySQL
-        run: |
           gcloud run deploy mysql \
             --image=${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest \
             --platform=managed \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --quiet
+
