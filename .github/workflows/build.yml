@@ -26,7 +26,7 @@ jobs:
         run: |
           docker-compose up -d
 
-       - name: Set execute permission for Tests.js
+      - name: Set execute permission for Tests.js
         working-directory: Backend
         run: |
           chmod +x Tests.js
