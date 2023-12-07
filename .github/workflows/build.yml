@@ -27,8 +27,8 @@ jobs:
           docker-compose up -d
           
       - name: Correr test unitarios
-        working-directory: ./backend
+        working-directory: ./Backend
         run: |
-          docker exec -it backend npx jest tests.js
+          docker exec -it backend npx jest Tests.js
         
 
