@@ -27,7 +27,7 @@ jobs:
           docker-compose up -d
       
       - name: Wait for containers to start
-        run: sleep 30 
+        run: sleep 60 
         
       - name: Correr test unitarios
         working-directory: ./Backend
