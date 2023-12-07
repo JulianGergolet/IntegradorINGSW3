@@ -13,18 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Docker
-        run: |
-          sudo apt-get update
-          sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-          sudo apt-get update
-          sudo apt-get install docker-ce -y
-
       - name: Build and run containers
         run: |
-          docker-compose up -d
+          nohup docker compose up &
 
       - name: Instalar Node.js
         uses: actions/setup-node@v2
@@ -35,9 +26,12 @@ jobs:
         run: npm install
         working-directory: ./Backend
 
-      - name: intalar mocha
+      - name: instalar mocha
         run: npm install --save-dev mocha 
         working-directory: ./Backend
+
+      - name: esperar
+        run: sleep 60
 
       - name: Correr backend
         run: nohup node index.js &    # Ejecuta la aplicación en segundo plano
