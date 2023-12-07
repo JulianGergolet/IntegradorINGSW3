@@ -26,6 +26,8 @@ jobs:
           npx mocha Tests.js
         working-directory: ./Backend
 
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
 
 
