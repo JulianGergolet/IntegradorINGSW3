@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 const pool = createPool({
-    host: 'database',
+    host: process.env.DB_HOST || 'database', 
     user: 'root',
     password: 'julian',
     database: 'juliancito',
@@ -63,3 +63,5 @@ app.get('/lasttransactions', async (req, res) => {
 app.listen(3000, () => {
     console.log('Estoy escuchando en el puerto 3000');
 });
+
+export default app; 
