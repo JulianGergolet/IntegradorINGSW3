@@ -38,8 +38,8 @@ jobs:
       - name: Correr Tests
         run: |
           export DB_HOST=localhost
-          (timeout 10 npm test || true)
-          if [ "$(timeout 10 npm test | grep -c '5 passing')" -eq 1 ]; then
+          (timeout 10 npx mocha Tests.js || true)
+          if [ "$(timeout 10 npx mocha Tests.js | grep -c '5 passing')" -eq 1 ]; then
             echo "Tests pasaron exitosamente."
           else
             echo "Los tests no pasaron. Terminando el flujo de trabajo."
