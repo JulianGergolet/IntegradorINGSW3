@@ -24,7 +24,7 @@ jobs:
 
       - name: Build and run containers
         run: |
-          docker-compose up -d
+          docker compose up 
 
       - name: Instalar Node.js
         uses: actions/setup-node@v2
