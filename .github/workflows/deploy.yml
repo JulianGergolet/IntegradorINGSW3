@@ -43,6 +43,7 @@ jobs:
             --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest \
             --platform=managed \
             --allow-unauthenticated
+            --quiet
 
       - name: Deploy to Cloud Run Frontend
         run: |
