@@ -25,4 +25,10 @@ jobs:
       - name: Build and run containers
         run: |
           docker-compose up -d
+          
+      - name: Correr test unitarios
+        working-directory: ./backend
+        run: |
+          docker exec -it backend npx jest tests.js
+        
 
