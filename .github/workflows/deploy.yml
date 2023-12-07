@@ -33,7 +33,9 @@ jobs:
         with:
           service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
           project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
-
+      - name: Set default region
+        run: gcloud config set run/region southamerica-east1
+        
       - name: Deploy to Cloud Run Backend
         run: |
           gcloud run deploy integradoringsw3-backend --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest --platform=managed
