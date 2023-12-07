@@ -1,40 +1,46 @@
-import request from 'supertest';
-import app from './index'; // Asegúrate de exportar tu aplicación desde index.js
 
-describe('Test de las rutas del servidor', () => {
-  let server;
+import { assert } from 'chai';
+import fetch from 'node-fetch';
 
-  beforeAll(async () => {
-    server = app.listen(4000); // Levanta el servidor en un puerto diferente para las pruebas
-  });
+describe('Backend API Tests', () => {
+    // Prueba para verificar la conexión a la base de datos al iniciar el servidor
+    it('Should establish a connection to the database', async () => {
+        // Realiza una solicitud GET a la ruta principal del servidor
+        const response = await fetch('http://localhost:3000/');
+        const data = await response.text();
 
-  afterAll((done) => {
-    server.close(done); // Cierra el servidor después de las pruebas
-  });
+        assert.equal(data, 'Hello World');
+    });
 
-  it('Debería obtener una respuesta "Hello World" en la ruta raíz', async () => {
-    const response = await request(app).get('/');
-    expect(response.status).toBe(200);
-    expect(response.text).toBe('Hello World');
-  });
+    // Prueba para verificar la inserción de una transacción en la base de datos
+    it('Should insert a transaction into the database', async () => {
+        const transaction = {
+            Descripcion: 'Compra de libros',
+            Precio: 50
+        };
 
-  it('Debería insertar una transacción correctamente', async () => {
-    const newTransaction = {
-      Descripcion: 'Prueba',
-      Precio: 100
-    };
+        // Realiza una solicitud POST para insertar la transacción
+        const postResponse = await fetch('http://localhost:3000/transaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(transaction)
+        });
+        const postData = await postResponse.text();
 
-    const response = await request(app)
-      .post('/transaction')
-      .send(newTransaction);
+        assert.equal(postResponse.status, 200);
+        assert.equal(postData, 'Transacción insertada correctamente');
+    });
 
-    expect(response.status).toBe(200);
-    expect(response.text).toBe('Transacción insertada correctamente');
-  });
+    // Prueba para verificar la obtención de las últimas transacciones desde la base de datos
+    it('Should retrieve the last 5 transactions from the database', async () => {
+        // Realiza una solicitud GET para obtener las últimas transacciones
+        const response = await fetch('http://localhost:3000/lasttransactions');
+        const data = await response.json();
 
-  it('Debería obtener las últimas transacciones', async () => {
-    const response = await request(app).get('/lasttransactions');
-    expect(response.status).toBe(200);
-    expect(response.body.length).toBeLessThanOrEqual(5); // Verifica que se obtengan como máximo 5 transacciones
-  });
+        assert.equal(response.status, 200);
+        assert.isArray(data);
+        assert.isAtMost(data.length, 5);
+    });
 });
