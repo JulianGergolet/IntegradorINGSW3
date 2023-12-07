@@ -17,19 +17,6 @@ jobs:
         run: |
           nohup docker compose up &
 
-      - name: Instalar Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18
-
-      - name: Instalar dependencias
-        run: npm install
-        working-directory: ./Backend
-
-      - name: instalar mocha
-        run: npm install --save-dev mocha 
-        working-directory: ./Backend
-
       - name: esperar
         run: sleep 60
 
