@@ -37,7 +37,7 @@ jobs:
       - name: Set default region
         run: gcloud config set run/region southamerica-east1
 
-      - name: Deploy services to Cloud Run
+      - name: Deploy services to Cloud Runs
         run: |
           gcloud run deploy integradoringsw3-backend \
             --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest \
