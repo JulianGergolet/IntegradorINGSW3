@@ -39,12 +39,13 @@ jobs:
 
       - name: Deploy services to Cloud Runs
         run: |
-          # Despliega la base de datos
           gcloud run deploy mysql \
             --image=${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest \
             --platform=managed \
             --allow-unauthenticated \
-            --quiet
+            --quiet \
+            --update-env-vars MYSQL_ROOT_PASSWORD=julian \
+            --update-env-vars MYSQL_DATABASE=juliancito
       
           # Espera 25 segundos antes de continuar
           sleep 25
