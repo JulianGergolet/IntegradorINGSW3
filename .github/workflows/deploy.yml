@@ -39,21 +39,28 @@ jobs:
 
       - name: Deploy services to Cloud Runs
         run: |
-          gcloud run deploy integradoringsw3-backend \
-            --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest \
-            --platform=managed \
-            --allow-unauthenticated \
-            --quiet
-
-          gcloud run deploy integradoringsw3-frontend \
-            --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest \
-            --platform=managed \
-            --allow-unauthenticated \
-            --quiet
-
+          # Despliega la base de datos
           gcloud run deploy mysql \
             --image=${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest \
             --platform=managed \
             --allow-unauthenticated \
             --quiet
-
+      
+          # Espera 25 segundos antes de continuar
+          sleep 25
+      
+          # Despliega el backend después del retraso
+          gcloud run deploy integradoringsw3-backend \
+            --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest \
+            --platform=managed \
+            --allow-unauthenticated \
+            --quiet
+      
+          # Despliega el frontend después del backend
+          gcloud run deploy integradoringsw3-frontend \
+            --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest \
+            --platform=managed \
+            --allow-unauthenticated \
+            --quiet
+      
+      
