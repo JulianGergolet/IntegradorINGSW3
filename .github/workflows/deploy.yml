@@ -45,7 +45,9 @@ jobs:
             --allow-unauthenticated \
             --quiet \
             --update-env-vars MYSQL_ROOT_PASSWORD=julian \
-            --update-env-vars MYSQL_DATABASE=juliancito
+            --update-env-vars MYSQL_DATABASE=juliancito \
+            --memory=1024Mi
+
       
           # Espera 25 segundos antes de continuar
           sleep 25
