@@ -37,33 +37,15 @@ jobs:
       - name: Set default region
         run: gcloud config set run/region southamerica-east1
 
-      - name: Deploy services to Cloud Runs
+      - name: Tag Docker images for GCR
         run: |
-          gcloud run deploy mysql \
-            --image=${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest \
-            --platform=managed \
-            --allow-unauthenticated \
-            --quiet \
-            --update-env-vars MYSQL_ROOT_PASSWORD=julian \
-            --update-env-vars MYSQL_DATABASE=juliancito \
-            --memory=1024Mi
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest gcr.io/ingsw3/integradoringsw3-backend:latest
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest gcr.io/ingsw3/integradoringsw3-frontend:latest
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest gcr.io/ingsw3/mysql:latest
 
-      
-          # Espera 25 segundos antes de continuar
-          sleep 25
-      
-          # Despliega el backend después del retraso
-          gcloud run deploy integradoringsw3-backend \
-            --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest \
-            --platform=managed \
-            --allow-unauthenticated \
-            --quiet
-      
-          # Despliega el frontend después del backend
-          gcloud run deploy integradoringsw3-frontend \
-            --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest \
-            --platform=managed \
-            --allow-unauthenticated \
-            --quiet
-      
+      - name: Push Docker images to GCR
+        run: |
+          docker push gcr.io/ingsw3/integradoringsw3-backend:latest
+          docker push gcr.io/ingsw3/integradoringsw3-frontend:latest
+          docker push gcr.io/ingsw3/mysql:latest
       
