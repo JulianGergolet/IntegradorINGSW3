@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 const pool = createPool({
-    host: 'database', 
+    host: 'database',
     user: 'root',
     password: 'julian',
     database: 'juliancito',
@@ -33,35 +33,19 @@ const pool = createPool({
 
 // Ruta POST para insertar en la base de datos
 app.post('/transaction', async (req, res) => {
-    try {
-        const { Descripcion, Precio } = req.body;
-        const insertQuery = 'INSERT INTO transaccion (Descripcion, Precio) VALUES (?, ?)';
-        const result = await pool.query(insertQuery, [Descripcion, Precio]);
-        
-        console.log('Transacción insertada correctamente en la base de datos');
-        res.status(200).send('Transacción insertada correctamente');
-    } catch (error) {
-        console.error('Error al insertar en la base de datos:', error);
-        res.status(500).send('Error interno del servidor');
-    }
+    // Código de manejo de transacciones
 });
 
 // Ruta GET para obtener las últimas 5 transacciones
 app.get('/lasttransactions', async (req, res) => {
-    try {
-        const selectQuery = 'SELECT * FROM transaccion ORDER BY id DESC LIMIT 5';
-        const [rows] = await pool.query(selectQuery);
-        
-        console.log('Últimas transacciones obtenidas correctamente');
-        res.status(200).json(rows);
-    } catch (error) {
-        console.error('Error al obtener las últimas transacciones:', error);
-        res.status(500).send('Error interno del servidor');
-    }
+    // Código para obtener las últimas transacciones
 });
 
-app.listen(3000, () => {
-    console.log('Estoy escuchando en el puerto 3000');
+// Obtener el puerto desde la variable de entorno PORT o usar 3000 como predeterminado
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Estoy escuchando en el puerto ${PORT}`);
 });
 
-export default app; 
+export default app;
