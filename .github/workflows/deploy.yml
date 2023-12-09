@@ -38,11 +38,6 @@ jobs:
 
       - name: Deploy services to Cloud Runs
         run: |
-          gcloud run deploy mysql \
-            --image=${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest \
-            --platform=managed \
-            --allow-unauthenticated \
-            --quiet
           gcloud run deploy integradoringsw3-backend \
             --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest \
             --platform=managed \
@@ -52,5 +47,9 @@ jobs:
             --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest \
             --platform=managed \
             --allow-unauthenticated \
-            --quiet
-      
+            --quiet
+          gcloud run deploy mysql \
+            --image=${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest \
+            --platform=managed \
+            --allow-unauthenticated \
+            --quiet
