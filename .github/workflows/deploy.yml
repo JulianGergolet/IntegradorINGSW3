@@ -43,13 +43,4 @@ jobs:
             --platform=managed \
             --allow-unauthenticated \
             --quiet
-          gcloud run deploy integradoringsw3-frontend \
-            --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest \
-            --platform=managed \
-            --allow-unauthenticated \
-            --quiet
-          gcloud run deploy mysql \
-            --image=${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest \
-            --platform=managed \
-            --allow-unauthenticated \
-            --quiet
+
