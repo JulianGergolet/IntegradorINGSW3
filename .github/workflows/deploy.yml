@@ -16,9 +16,6 @@ jobs:
       - name: Login to Heroku Container Registry
         run: echo ${{ secrets.HEROKU_API_KEY }} | docker login -u=_ --password-stdin registry.heroku.com
 
-      - name: Login to Heroku CLI
+      - name: Configure Heroku CLI
         run: |
-          echo "${{ secrets.HEROKU_API_KEY }}" | base64 --decode | heroku login --interactive
-          heroku container:login
-
-
+          echo -e "machine api.heroku.com\n  login $HEROKU_EMAIL\n  password $HEROKU_API_KEY\nmachine git.heroku.com\n  login $HEROKU_EMAIL\n  password $HEROKU_API_KEY" > ~/.netrc
