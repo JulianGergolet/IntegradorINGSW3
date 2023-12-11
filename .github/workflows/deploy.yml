@@ -37,7 +37,7 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku ps:scale web=1 -a ingsw3backend
 
-            - name: Build and push FRONTEND
+      - name: Build and push FRONTEND
         working-directory: ./Frontend
         run: |
           docker build -t frontend .
