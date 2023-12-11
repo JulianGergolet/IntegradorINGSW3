@@ -33,7 +33,7 @@ jobs:
         run: heroku container:release web -a ingsw3
 
       - name: Build and push Docker image for frontend
-        working-directory: ./frontend
+        working-directory: ./Frontend
         run: |
           docker build -t frontend .
           docker tag frontend registry.heroku.com/your-heroku-app-frontend/web
