@@ -17,6 +17,10 @@ jobs:
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
 
-      - name: Login en Heroku Container Registry
-        run: echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
+      - name: Inicio de sesión en Heroku
+        run: heroku login -i
 
+      - name: Configuración de la clave API de Heroku
+        run: heroku git:remote -a NOMBRE_DE_TU_APP_EN_HEROKU
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
