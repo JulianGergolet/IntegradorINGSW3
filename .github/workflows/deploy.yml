@@ -13,27 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Heroku CLI
+      - name: Login to Heroku
         run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
-
-      - name: Heroku Login
-        run: heroku login -i
-
-      - name: Configure Heroku Container
-        run: heroku git:remote -a ingsw3
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-
-      - name: Login to Heroku Container Registry
-        run: heroku container:login
-
-      - name: Build and Push Docker Image
-        working-directory: ./Backend
-        run: |
-          docker build -t registry.heroku.com/ingsw3/web .
-          docker push registry.heroku.com/ingsw3/web
-
-      - name: Release Image on Heroku
-        run: heroku container:release web -a ingsw3
+          echo ${{ secrets.HEROKU_API_KEY }} | docker login -u=_ --password-stdin registry.heroku.com
+          heroku container:login
 
