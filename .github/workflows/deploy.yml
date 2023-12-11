@@ -13,34 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: Pull Docker images
+      - name: Instalar Heroku CLI
         run: |
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest
-      - name: Authenticate with Google Cloud
-        run: echo '${{ secrets.GCLOUD_SERVICE_KEY }}' > /tmp/gcloud_key.json && gcloud auth activate-service-account --key-file=/tmp/gcloud_key.json
+          curl https://cli-assets.heroku.com/install.sh | sh
 
-      - name: Enable Cloud Run API
-        run: gcloud services enable run.googleapis.com --project=${{ secrets.GCLOUD_PROJECT_ID }}
-
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0
-        with:
-          service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
-          project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
-          
-      - name: Set default region
-        run: gcloud config set run/region southamerica-east1
-
-      - name: Deploy services to Cloud Runs
-        run: |
-          gcloud run deploy integradoringsw3-backend \
-            --image=${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest \
-            --platform=managed \
-            --allow-unauthenticated \
-            --quiet
+      - name: Verificar instalación
+        run: heroku --version
 
