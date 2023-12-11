@@ -24,7 +24,7 @@ jobs:
         working-directory: ./Backend 
         run: |
           docker build -t backend .
-          docker tag myapp-image registry.heroku.com/ingsw3/web
+          docker tag backend registry.heroku.com/ingsw3/web
           docker push registry.heroku.com/ingsw3/web
 
       - name: Release to Heroku
