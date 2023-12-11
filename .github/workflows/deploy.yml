@@ -36,3 +36,20 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku ps:scale web=1 -a ingsw3backend
+
+            - name: Build and push FRONTEND
+        working-directory: ./Frontend
+        run: |
+          docker build -t frontend .
+          docker tag frontend registry.heroku.com/ingsw3frontend/web
+          docker push registry.heroku.com/ingsw3frontend/web
+
+      - name: Release to Heroku FRONTEND
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release web -a ingsw3frontend
+        
+      - name: Activate Deployment on Heroku FRONTEND
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku ps:scale web=1 -a ingsw3frontend
