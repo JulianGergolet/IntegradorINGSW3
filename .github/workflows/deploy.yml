@@ -19,3 +19,13 @@ jobs:
       - name: Configure Heroku CLI
         run: |
           echo -e "machine api.heroku.com\n  login $HEROKU_EMAIL\n  password $HEROKU_API_KEY\nmachine git.heroku.com\n  login $HEROKU_EMAIL\n  password $HEROKU_API_KEY" > ~/.netrc
+      
+      - name: Build and push Docker image
+        working-directory: ./Backend 
+        run: |
+          docker build -t backend .
+          docker tag myapp-image registry.heroku.com/ingsw3/web
+          docker push registry.heroku.com/ingsw3/web
+
+      - name: Release to Heroku
+        run: heroku container:release web -a ingsw3
