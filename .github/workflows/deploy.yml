@@ -21,6 +21,6 @@ jobs:
         run: heroku login -i
 
       - name: Configuración de la clave API de Heroku
-        run: heroku git:remote -a NOMBRE_DE_TU_APP_EN_HEROKU
+        run: heroku git:remote -a ingsw3
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
