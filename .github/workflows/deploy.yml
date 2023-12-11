@@ -31,3 +31,8 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release web -a ingsw3
+        
+      - name: Activate Deployment on Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku ps:scale web=1 -a ingsw3
