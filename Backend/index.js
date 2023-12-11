@@ -60,8 +60,10 @@ app.get('/lasttransactions', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Estoy escuchando en el puerto 3000');
+const PORT = process.env.PORT || 3000; // Utiliza el puerto proporcionado por Heroku o el 3000 por defecto
+
+app.listen(PORT, () => {
+    console.log(`Estoy escuchando en el puerto ${PORT}`);
 });
 
 export default app; 
