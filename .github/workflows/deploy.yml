@@ -31,6 +31,18 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release web -a ingsw3
+
+      - name: Build and push Docker image for frontend
+        working-directory: ./frontend
+        run: |
+          docker build -t frontend .
+          docker tag frontend registry.heroku.com/your-heroku-app-frontend/web
+          docker push registry.heroku.com/your-heroku-app-frontend/web
+
+      - name: Release frontend to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release web -a your-heroku-app-frontend
         
       - name: Activate Deployment on Heroku
         env:
