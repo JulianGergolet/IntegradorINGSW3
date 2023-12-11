@@ -24,3 +24,13 @@ jobs:
         run: heroku git:remote -a ingsw3
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          
+      - name: Cargar imagen 
+        working-directory: ./Backend  
+        run: |
+          heroku container:login
+          docker build -t registry.heroku.com/ingsw3/web .
+          docker push registry.heroku.com/ingsw3/web
+
+      - name: Desplegar imagen en Heroku
+        run: heroku container:release web -a ingsw3
