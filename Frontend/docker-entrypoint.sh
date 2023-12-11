@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-# Realizar la sustitución de variables en nginx.conf
-envsubst '${PORT:-80}' < /etc/nginx/nginx.conf > /etc/nginx/conf.d/default.conf
+# Reemplaza ${PORT} por el número de puerto proporcionado por Heroku al ejecutar el contenedor
+sed -i -e 's/\${PORT}/'"$PORT"'/g' /etc/nginx/nginx.conf
 
 # Iniciar Nginx
 nginx -g 'daemon off;'
