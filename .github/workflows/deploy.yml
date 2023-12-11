@@ -31,7 +31,7 @@ jobs:
         working-directory: ./Frontend
         run: |
           docker build -t frontend .
-          docker tag frontend registry.heroku.com/your-heroku-app-frontend/web
+          docker tag frontend registry.heroku.com/ingsw3/web
           docker push registry.heroku.com/your-heroku-app-frontend/web
 
       - name: Release frontend to Heroku
