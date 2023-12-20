@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello Worldddddddd');
+    res.send('Hello World');
 });
 
 const pool = createPool({
