@@ -6,6 +6,7 @@ RUN rm -rf /usr/share/nginx/html/*
 
 # Copia los archivos de tu frontend al directorio de nginx
 COPY index.html /usr/share/nginx/html
+COPY scripts.js /usr/share/nginx/html
 
 # Define una variable de entorno para el puerto y expone ese puerto
 ENV PORT = 80
