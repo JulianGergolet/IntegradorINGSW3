@@ -1,7 +1,8 @@
 import http.server
 import socketserver
+import os
 
-PORT = 8080
+PORT = int(os.environ.get('PORT', 8080))  # Obtener el puerto de la variable de entorno PORT o usar 8080 por defecto
 
 Handler = http.server.SimpleHTTPRequestHandler
 
