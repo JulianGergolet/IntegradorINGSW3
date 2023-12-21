@@ -18,7 +18,7 @@ jobs:
           nohup docker compose up &
 
       - name: esperar
-        run: sleep 50
+        run: sleep 60
 
       - name: Correr Tests
         run: |
