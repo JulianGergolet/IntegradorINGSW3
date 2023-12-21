@@ -15,8 +15,8 @@ jobs:
 
       - name: Build and run containers
         run: |
-           docker compose up -d
-           sleep 60
+           nohup docker compose up &
+           sleep 90
 
       - name: Correr Tests
         run: |
