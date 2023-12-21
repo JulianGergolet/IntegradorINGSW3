@@ -13,10 +13,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build and run containers
+      - name: Build and run FRONT
+        working-directory: ./Frontend
         run: |
-           nohup docker compose up &
-           sleep 90
+           nohup docker build -t front . &
+           sleep 10
+           
+      - name: Build and run DATABASE
+        working-directory: ./Database
+        run: |
+           nohup docker build -t database . &
+           sleep 60
+
+      - name: Build and run BACK
+        working-directory: ./Backend
+        run: |
+           nohup docker build -t back . &
 
       - name: Correr Tests
         run: |
