@@ -19,7 +19,7 @@ jobs:
 
       - name: esperar
         run: |
-          sleep 60
+          sleep 90
 
       - name: Correr Tests
         run: |
