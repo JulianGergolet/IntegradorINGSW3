@@ -1,9 +1,15 @@
 version: '3'
 services: 
+
   database: 
-    build: ./Database  # Ruta al contexto del Dockerfile de la base de datos
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=julian
+      - MYSQL_DATABASE=juliancito
     ports: 
       - 3306:3306
+    volumes:
+      - ./transacciones.sql:/docker-entrypoint-initdb.d/transacciones.sql
 
   backend: 
     build: ./Backend

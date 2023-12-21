@@ -12,5 +12,5 @@ RUN npm install
 COPY . .
 
 # Espera a que la base de datos esté disponible y luego inicia el backend
-CMD ["sh", "-c", "sleep 70 && node index.js"]
+CMD ["sh", "-c", "sleep 90 && node index.js"]
 
