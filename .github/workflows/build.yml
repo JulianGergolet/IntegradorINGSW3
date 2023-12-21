@@ -23,7 +23,10 @@ jobs:
         working-directory: ./Database
         run: |
            nohup docker build -t database . &
-           sleep 60
+
+      - name: esperar
+        run: |
+          sleep 90
 
       - name: Build and run BACK
         working-directory: ./Backend
