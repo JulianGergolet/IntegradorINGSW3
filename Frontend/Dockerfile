@@ -9,7 +9,7 @@ COPY index.html /usr/share/nginx/html
 COPY scripts.js /usr/share/nginx/html
 
 # Define una variable de entorno para el puerto y expone ese puerto
-ENV PORT = 80
+ENV PORT = 8080
 
 # Comando para iniciar el servidor cuando se ejecute el contenedor
 CMD ["nginx", "-g", "daemon off;"]
