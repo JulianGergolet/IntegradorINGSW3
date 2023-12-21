@@ -1,15 +1,17 @@
-# Usa una imagen de nginx para servir el frontend
-FROM nginx:latest
+# Utiliza una imagen de Python para construir el contenedor
+FROM python:3.9-slim
 
-# Elimina la configuración predeterminada de nginx
-RUN rm -rf /usr/share/nginx/html/*
+# Establece el directorio de trabajo en /app
+WORKDIR /app
 
-# Copia los archivos de tu frontend al directorio de nginx
-COPY index.html /usr/share/nginx/html
-COPY scripts.js /usr/share/nginx/html
+# Copia los archivos frontend al directorio de trabajo /app
+COPY index.html scripts.js /app/
 
-# Define una variable de entorno para el puerto y expone ese puerto
-ENV PORT = 8080
+# Copia el archivo del servidor web Python al directorio de trabajo /app
+COPY server.py /app/
 
-# Comando para iniciar el servidor cuando se ejecute el contenedor
-CMD ["nginx", "-g", "daemon off;"]
+# Expone el puerto 8000
+EXPOSE 8080
+
+# Ejecuta el servidor web Python al iniciar el contenedor
+CMD ["python", "-u", "server.py"]
