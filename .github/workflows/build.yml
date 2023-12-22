@@ -34,11 +34,11 @@ jobs:
         run: |
           docker tag integradoringsw3-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest
           docker tag integradoringsw3-frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest
-          docker tag mysql:latest ${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest
+          docker tag integradoringsw3-database ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-database
 
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/mysql:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-database
           
 
 
