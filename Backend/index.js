@@ -17,11 +17,11 @@ let pool;
 if (process.env.NODE_ENV === 'production') {
     // Configuración para conexión en entorno de producción (Heroku)
     pool = createPool({
-        host: process.env.JAWSDB_HOST,
-        user: process.env.JAWSDB_USER,
-        password: process.env.JAWSDB_PASSWORD,
-        database: process.env.JAWSDB_DATABASE,
-        port: process.env.JAWSDB_PORT
+        host: 'cwe1u6tjijexv3r6.cbetxkdyhwsb.us-east-1.rds.amazonaws.com	',
+        user: 'sayqs9nmswsaipkv',
+        password: 'x1sh2kupdhtij79x',
+        database: 'gdhllnwvgt3kkj5m',
+        port: 3306
     });
 } else {
     // Configuración para conexión en entorno local
