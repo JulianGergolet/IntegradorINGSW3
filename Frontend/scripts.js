@@ -8,7 +8,7 @@ formElement.addEventListener("submit", (event) => {
     let transaccion = { Descripcion: Descripcion, Precio: Precio };
     let transaccionJson = JSON.stringify(transaccion);
 
-    fetch('https://ingsw3backend-5a663973aa85.herokuapp.com//transaction', {
+    fetch('https://ingsw3backend-5a663973aa85.herokuapp.com/transaction', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ formElement.addEventListener("submit", (event) => {
     .then(data => {
         console.log(data);
         // Después de enviar la transacción, obtener las últimas transacciones
-        fetch('https://ingsw3backend-5a663973aa85.herokuapp.com//lasttransactions')
+        fetch('https://ingsw3backend-5a663973aa85.herokuapp.com/lasttransactions')
         .then(response => response.json())
         .then(lastTransactions => {
             console.log('Últimas 5 transacciones:', lastTransactions);
