@@ -12,13 +12,27 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-const pool = createPool({
-    host: process.env.DB_HOST || 'database',
-    user: 'root',
-    password: 'julian',
-    database: 'juliancito',
-    port: 3306
-});
+let pool;
+
+if (process.env.NODE_ENV === 'production') {
+    // Configuración para conexión en entorno de producción (Heroku)
+    pool = createPool({
+        host: process.env.JAWSDB_HOST,
+        user: process.env.JAWSDB_USER,
+        password: process.env.JAWSDB_PASSWORD,
+        database: process.env.JAWSDB_DATABASE,
+        port: process.env.JAWSDB_PORT
+    });
+} else {
+    // Configuración para conexión en entorno local
+    pool = createPool({
+        host: 'database',
+        user: 'root',
+        password: 'julian',
+        database: 'juliancito',
+        port: 3306
+    });
+}
 
 // Verifica la conexión a la base de datos al inicio del servidor
 (async () => {
