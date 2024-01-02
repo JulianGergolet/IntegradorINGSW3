@@ -26,10 +26,10 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     // Configuración para conexión en entorno local
     pool = createPool({
-        host: 'database',
-        user: 'root',
-        password: 'julian',
-        database: 'juliancito',
+        host: 'cwe1u6tjijexv3r6.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        user: 'sayqs9nmswsaipkv',
+        password: 'x1sh2kupdhtij79x',
+        database: 'gdhllnwvgt3kkj5m',
         port: 3306
     });
 }
