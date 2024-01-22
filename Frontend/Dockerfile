@@ -7,9 +7,6 @@ WORKDIR /app
 # Copia los archivos frontend al directorio de trabajo /app
 COPY index.html scripts.js /app/
 
-# Copia el archivo del servidor web Python al directorio de trabajo /app
-COPY server.py /app/
-
 # Expone el puerto 8000
 EXPOSE 8080
 
