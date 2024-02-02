@@ -5,7 +5,7 @@ import cors from 'cors';
 const app = express();
 app.use(cors());
 
-// Middleware para permitir el uso de JSON en las solicitudes
+// Middleware para permitir el uso de JSON en las solicitudess
 app.use(express.json());
 
 app.get('/', (req, res) => {
