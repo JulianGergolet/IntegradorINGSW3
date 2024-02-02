@@ -1,13 +1,11 @@
-import os
 import http.server
 import socketserver
+import os
 
-# Utiliza el puerto proporcionado por Heroku o el puerto 8080 de manera predeterminada
-port = int(os.environ.get('PORT', 8080))
+PORT = int(os.environ.get('PORT', 8080))  # Obtener el puerto de la variable de entorno PORT o usar 8080 por defecto
 
-# Resto del código sin cambios
-handler = http.server.SimpleHTTPRequestHandler
+Handler = http.server.SimpleHTTPRequestHandler
 
-with socketserver.TCPServer(("", port), handler) as httpd:
-    print(f"Servidor en el puerto {port}")
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print("Servidor web en el puerto:", PORT)
     httpd.serve_forever()
