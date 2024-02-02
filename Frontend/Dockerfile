@@ -11,4 +11,4 @@ COPY index.html scripts.js /app/
 EXPOSE $PORT
 
 # Ejecuta el servidor web Python al iniciar el contenedor
-CMD ["python", "-m", "http.server", "$PORT"]
+CMD ["python", "-m", "http.server", $PORT]
