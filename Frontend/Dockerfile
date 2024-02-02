@@ -5,10 +5,10 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copia los archivos frontend al directorio de trabajo /app
-COPY index.html scripts.js server.py /app/
+COPY index.html scripts.js /app/
 
-# Expone el puerto 8000
-EXPOSE 8080
+# Exponer el puerto proporcionado por Heroku
+EXPOSE $PORT
 
 # Ejecuta el servidor web Python al iniciar el contenedor
-CMD ["python", "-u", "server.py"]
+CMD ["python", "-m", "http.server", "$PORT"]
