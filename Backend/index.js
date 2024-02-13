@@ -20,7 +20,7 @@ const pool = createPool({
     port: 3306
 });
 
-// Verifica la conexión a la base de datos al inicio del servidor
+// Verifica la conexión a la bd
 (async () => {
     try {
         const connection = await pool.getConnection();
@@ -31,7 +31,7 @@ const pool = createPool({
     }
 })();
 
-// Ruta POST para insertar en la base de datos
+//  POST para publicar
 app.post('/transaction', async (req, res) => {
     try {
         const { Descripcion, Precio } = req.body;
@@ -46,7 +46,7 @@ app.post('/transaction', async (req, res) => {
     }
 });
 
-// Ruta GET para obtener las últimas 5 transacciones
+//  GET para obtener las últimas 5 transacciones
 app.get('/lasttransactions', async (req, res) => {
     try {
         const selectQuery = 'SELECT * FROM transaccion ORDER BY id DESC LIMIT 5';
@@ -60,7 +60,7 @@ app.get('/lasttransactions', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000; // Utiliza el puerto proporcionado por Heroku o el 3000 por defecto
+const PORT = process.env.PORT || 3000; // Usa el puerto proporcionado por Heroku o el 3000 por defecto
 
 app.listen(PORT, () => {
     console.log(`Estoy escuchando en el puerto ${PORT}`);

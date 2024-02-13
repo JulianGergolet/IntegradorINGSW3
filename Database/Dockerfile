@@ -1,4 +1,3 @@
-# Dockerfile para MySQL
 FROM mysql
 
 # Variables de entorno para configurar la base de datos

@@ -1,0 +1,58 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Cambiar la fuente a una que transmita más suavidad */
+    background-color: #f0f0f0; /* Color de fondo suave */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto; /* Mover el contenedor hacia abajo */
+    padding: 20px;
+}
+
+input[type="text"],
+button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: box-shadow 0.3s; /* Agregar transición para la sombra */
+    background-color: #f9f9f9; /* Color de fondo suave para inputs */
+}
+
+input[type="text"]:focus,
+button:focus {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añadir una suave onda al enfocar */
+}
+
+button {
+    background-color: #4caf50; /* Color de botón */
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049; /* Color de botón en hover */
+}
+
+#ultimasTransacciones {
+    background-color: #fff; /* Fondo de la sección de últimas transacciones */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px; /* Ajustar margen superior para ubicar más abajo */
+}
+
+h2 {
+    color: #333; /* Color de título */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
