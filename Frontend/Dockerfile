@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copia los archivos frontend al directorio de trabajo /app
-COPY index.html scripts.js /app/
+COPY index.html scripts.js style.css /app/
 
 # Copia el archivo del servidor web Python al directorio de trabajo /app
 COPY server.py /app/
