@@ -53,14 +53,10 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku ps:scale web=1 -a ingsw3frontend
-        
-      - name: esperar
-        run: |
-          sleep 30
 
       - name: Execute pruebas codecepts
         working-directory: ./Frontend
         run: | 
           chmod +x node_modules/.bin/codeceptjs
-          npx codeceptjs run
+          npx codeceptjs run integration_test.js
 
