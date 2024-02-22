@@ -56,7 +56,7 @@ jobs:
         
       - name: esperar
         run: |
-          sleep 10
+          sleep 30
 
       - name: Execute pruebas codecepts
         working-directory: ./Frontend
