@@ -54,9 +54,15 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku ps:scale web=1 -a ingsw3frontend
 
-      - name: Execute pruebas codecepts
+      - name: Install dependencies
+        run: npm install
         working-directory: ./Frontend
-        run: | 
-          chmod +x node_modules/.bin/codeceptjs
-          npx codeceptjs run integration_test.js
 
+      - name: Install Chromium
+        uses: puppeteer/setup-chromium@v2
+
+      - name: Execute pruebas codecepts
+        run: | 
+          npm run codeceptjs:install
+          npx codeceptjs run integration_test.js
+        working-directory: ./Frontend
