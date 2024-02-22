@@ -3,10 +3,13 @@ exports.config = {
   tests: './*_test.js',
   output: './output',
   helpers: {
-    Puppeteer: {
+    Playwright: {
+      browser: 'chromium',
       url: 'https://ingsw3frontend-e0243388a7b1.herokuapp.com/',
       show: true,
-      windowSize: '1200x900'
+      chromium: {
+        executablePath: 'C:\\Users\\Usuario\\AppData\\Local\\Chromium\\Application\\chrome.exe'
+      }
     }
   },
   include: {

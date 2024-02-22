@@ -1,13 +1,14 @@
 Feature('Pruebas de integración');
 
-Scenario('Enviar transacción y verificar últimas transacciones', ({I}) => {
+Scenario('Enviar transacción y verificar últimas transacciones', async ({ I }) => {
   I.amOnPage('/');
-  I.fillField('#Descripcion', 'Compra de alimentos');
-  I.fillField('#Precio', '50');
-  I.click('Guardar Transaccion');
+  await I.waitForElement('#Descripcion');
+  await I.fillField('#Descripcion', 'Compra de alimentos');
+  await I.waitForElement('#Precio');
+  await I.fillField('#Precio', '50');
+  await I.click('Guardar Transaccion');
 
-  I.see('Transacción insertada correctamente');
+  await I.see('Transacción insertada correctamente');
 
-  // Verificar que las últimas transacciones se muestran correctamente
-  I.see('Compra de alimentos: $50', '#listaTransacciones');
+  await I.see('Compra de alimentos: $50', '#listaTransacciones');
 });

@@ -1,5 +1,6 @@
 const formElement = document.getElementById("GuardarTransaccion");
 const listaTransaccionesElement = document.getElementById("listaTransacciones");
+const mensajeElement = document.getElementById("mensaje");
 
 formElement.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -18,6 +19,9 @@ formElement.addEventListener("submit", (event) => {
     .then(response => response.text())
     .then(data => {
         console.log(data);
+        // Mostrar mensaje de éxito
+        mensajeElement.innerText = data;
+
         // Después de enviar la transacción, obtener las últimas transacciones
         fetch('https://ingsw3backend-5a663973aa85.herokuapp.com/lasttransactions')
         .then(response => response.json())
