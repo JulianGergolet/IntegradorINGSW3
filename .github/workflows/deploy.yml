@@ -57,5 +57,6 @@ jobs:
       - name: Execute pruebas codecepts
         working-directory: ./Frontend
         run: | 
+          chmod +x node_modules/.bin/codeceptjs
           npx codeceptjs run
 
