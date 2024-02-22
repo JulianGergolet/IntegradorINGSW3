@@ -8,7 +8,9 @@ Scenario('Enviar transacción y verificar últimas transacciones', async ({ I })
   await I.fillField('#Precio', '50');
   await I.click('Guardar Transaccion');
 
+  await I.wait(5);
   await I.see('Transacción insertada correctamente');
 
   await I.see('Compra de alimentos: $50', '#listaTransacciones');
 });
+
