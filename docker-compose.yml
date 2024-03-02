@@ -1,0 +1,21 @@
+version: '3'
+services: 
+
+  database: 
+    build: ./Database
+    ports: 
+      - 3306:3306
+
+  backend: 
+    build: ./Backend
+    depends_on:
+      - database
+    links: 
+      - database
+    ports:
+      - 3000:3000
+    
+  frontend:
+    build: ./Frontend # Ruta a la carpeta frontend
+    ports:
+      - 8080:8080
