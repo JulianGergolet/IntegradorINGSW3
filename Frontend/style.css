@@ -2,7 +2,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Cambiar la fuente a una que transmita más suavidad */
     background-color: #f0f0f0; /* Color de fondo suave */
     margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 
 .container {
@@ -37,8 +37,9 @@ button:hover {
 }
 
 #ultimasTransacciones {
-    background-color: #fff; /* Fondo de la sección de últimas transacciones */
+    background-color: #f0f0f0; /* Fondo de la sección de últimas transacciones */
     padding: 20px;
+    height: 300px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 50px; /* Ajustar margen superior para ubicar más abajo */
