@@ -5,7 +5,7 @@ describe('Backend API Tests', () => {
     // Prueba para verificar la conexión a la base de datos al iniciar el servidor
     it('Should establish a connection to the database', async () => {
         // Realiza una solicitud GET a la ruta principal del servidor
-        const response = await fetch('https://ingsw3backend-5a663973aa85.herokuapp.com/');
+        const response = await fetch('http://localhost:3000/');
         const data = await response.text();
 
         assert.equal(data, 'Hello World');
@@ -19,7 +19,7 @@ describe('Backend API Tests', () => {
         };
 
         // Realiza una solicitud POST para insertar la transacción
-        const postResponse = await fetch('https://ingsw3backend-5a663973aa85.herokuapp.com/transaction', {
+        const postResponse = await fetch('http://localhost:3000/transaction', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ describe('Backend API Tests', () => {
     // Prueba para verificar la obtención de las últimas transacciones desde la base de datos
     it('Should retrieve the last 5 transactions from the database', async () => {
         // Realiza una solicitud GET para obtener las últimas transacciones
-        const response = await fetch('https://ingsw3backend-5a663973aa85.herokuapp.com/lasttransactions');
+        const response = await fetch('http://localhost:3000/lasttransactions');
         const data = await response.json();
 
         assert.equal(response.status, 200);
