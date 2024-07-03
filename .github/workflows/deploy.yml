@@ -40,6 +40,7 @@ jobs:
       - name: Build and push FRONTEND
         working-directory: ./Frontend
         run: |
+          docker rmi frontend
           docker build -t frontend .
           docker tag frontend registry.heroku.com/ingsw3frontend/web
           docker push registry.heroku.com/ingsw3frontend/web
