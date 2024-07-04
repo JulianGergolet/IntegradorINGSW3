@@ -1,4 +1,4 @@
-name: Build Applicationn
+name: Build and Deploy Applicationn 
 
 on:
   push:
@@ -39,6 +39,45 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-backend:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-frontend:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/integradoringsw3-database
+
+      - name: Login to Heroku Container Registry
+        run: echo ${{ secrets.HEROKU_API_KEY }} | docker login -u=_ --password-stdin registry.heroku.com
+
+      - name: Configure Heroku CLI
+        run: |
+          echo -e "machine api.heroku.com\n  login $HEROKU_EMAIL\n  password $HEROKU_API_KEY\nmachine git.heroku.com\n  login $HEROKU_EMAIL\n  password $HEROKU_API_KEY" > ~/.netrc
+      
+      - name: Build and push BACKEND
+        working-directory: ./Backend 
+        run: |
+          docker build -t backend .
+          docker tag backend registry.heroku.com/ingsw3backend/web
+          docker push registry.heroku.com/ingsw3backend/web
+      - name: Release to Heroku BACKEND
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release web -a ingsw3backend
+        
+      - name: Activate Deployment on Heroku BACKEND
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku ps:scale web=1 -a ingsw3backend
+
+      - name: Build and push FRONTEND
+        working-directory: ./Frontend
+        run: |
+          docker build -t frontend .
+          docker tag frontend registry.heroku.com/ingsw3frontend/web
+          docker push registry.heroku.com/ingsw3frontend/web
+      - name: Release to Heroku FRONTEND
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release web -a ingsw3frontend
+        
+      - name: Activate Deployment on Heroku FRONTEND
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku ps:scale web=1 -a ingsw3frontend
           
 
 
