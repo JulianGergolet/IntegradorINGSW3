@@ -63,7 +63,7 @@ button:hover {
 }
 
 #ultimasTransacciones {
-    background-color:white; 
+    background-color:red; 
     padding: 20px;
     height: 250px;
     margin-top: 50px;

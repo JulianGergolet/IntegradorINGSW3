@@ -8,7 +8,7 @@ describe('Backend API Tests', () => {
         const response = await fetch('http://localhost:3000/');
         const data = await response.text();
 
-        assert.equal(data, 'Hello World');
+        assert.equal(data, 'Hello Worldd');
     });
 
     // Prueba para verificar la inserción de una transacción en la base de datos
