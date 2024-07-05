@@ -6,7 +6,7 @@ Scenario('Enviar transacción y verificar últimas transacciones', async ({ I })
   await I.fillField('#Descripcion', 'Compra de alimentos');
   await I.waitForElement('#Precio');
   await I.fillField('#Precio', '50');
-  await I.click('Guardar Transaccion');
+  await I.click('Guardar Transacion');
 
   await I.wait(15);
   await I.see('Transacción insertada correctamente');
