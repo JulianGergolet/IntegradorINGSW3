@@ -29,10 +29,11 @@ const pool = createPool({
     }
 })();
 
-//  POST para publicar
 app.post('/transaction', async (req, res) => {
     try {
         const { Descripcion, Precio } = req.body;
+
+        // La lógica en el backend permanece igual
         const insertQuery = 'INSERT INTO transaccion (Descripcion, Precio) VALUES (?, ?)';
         const result = await pool.query(insertQuery, [Descripcion, Precio]);
         
@@ -43,6 +44,7 @@ app.post('/transaction', async (req, res) => {
         res.status(500).send('Error interno del servidor');
     }
 });
+
 
 //  GET para obtener las últimas 5 transacciones
 app.get('/lasttransactions', async (req, res) => {
